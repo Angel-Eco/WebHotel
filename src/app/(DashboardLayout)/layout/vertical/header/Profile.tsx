@@ -62,13 +62,13 @@ const Profile = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         sx={{
           '& .MuiMenu-paper': {
-            width: '360px',
-            p: 4,
+            width: '250px',
+            p: 1
           },
         }}
       >
-        <Typography variant="h5">User Profile</Typography>
-        <Stack direction="row" py={3} spacing={2} alignItems="center">
+        
+        <Stack direction="row" py={0} spacing={2} alignItems="center">
         <Avatar src={"/images/profile/user-1.jpg"} alt={"ProfileImg"} sx={{ width: 95, height: 95 }} />
           <Box>
             <Typography variant="subtitle2" color="textPrimary" fontWeight={600}>
@@ -84,8 +84,7 @@ const Profile = () => {
               alignItems="center"
               gap={1}
             >
-              <IconMail width={15} height={15} />
-              angelespinoza.aaes@gmail.com
+              
             </Typography>
           </Box>
         </Stack>
@@ -143,20 +142,7 @@ const Profile = () => {
           </Box>
         ))}
         <Box mt={2}>
-          <Box bgcolor="primary.light" p={3} mb={3} overflow="hidden" position="relative">
-            <Box display="flex" justifyContent="space-between">
-              <Box>
-                <Typography variant="h5" mb={2}>
-                  Unlimited <br />
-                  Access
-                </Typography>
-                <Button variant="contained" color="primary">
-                  Upgrade
-                </Button>
-              </Box>
-              <Image src={"/images/backgrounds/unlimited-bg.png"} width={150} height={183} style={{ height: 'auto', width: 'auto' }} alt="unlimited" className="signup-bg" />
-            </Box>
-          </Box>
+
           <Button href="/auth/auth1/login" variant="outlined" color="primary" component={Link} fullWidth>
             Logout
           </Button>
