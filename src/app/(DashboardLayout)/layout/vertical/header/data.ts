@@ -60,22 +60,16 @@ interface ProfileType {
 }
 const profile: ProfileType[] = [
   {
-    href: "/apps/user-profile/profile",
+    href: "/theme-pages/account-settings",
     title: "My Profile",
     subtitle: "Account Settings",
     icon: "/images/svgs/icon-account.svg",
   },
   {
-    href: "/apps/email",
-    title: "My Inbox",
-    subtitle: "Messages & Emails",
+    href: "/theme-pages/faq",
+    title: "FAQ",
+    subtitle: "Questions",
     icon: "/images/svgs/icon-inbox.svg",
-  },
-  {
-    href: "/apps/notes",
-    title: "My Tasks",
-    subtitle: "To-do and Daily Tasks",
-    icon: "/images/svgs/icon-tasks.svg",
   },
 ];
 

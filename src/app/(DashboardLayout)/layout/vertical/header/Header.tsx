@@ -10,8 +10,7 @@ import { toggleSidebar, toggleMobileSidebar } from '@/store/customizer/Customize
 import { IconMenu2 } from '@tabler/icons-react';
 import Notifications from './Notification';
 import Profile from './Profile';
-import Cart from './Cart';
-import Search from './Search';
+//import Cart from './Cart';
 import Language from './Language';
 import { AppState } from '@/store/store';
 import Navigation from './Navigation';
@@ -54,9 +53,8 @@ const Header = () => {
         </IconButton>
 
         {/* ------------------------------------------- */}
-        {/* Search Dropdown */}
-        {/* ------------------------------------------- */}
-        <Search />
+        {/* Search Dropdown fue eliminado*/}
+        {/* ------------------------------------------- */}        
         {lgUp ? (
           <>
             <Navigation />
@@ -69,7 +67,10 @@ const Header = () => {
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}
           {/* ------------------------------------------- */}
+          {/*
+          Se quita carrito
           <Cart />
+          */}
           {/* ------------------------------------------- */}
           {/* End Ecommerce Dropdown */}
           {/* ------------------------------------------- */}

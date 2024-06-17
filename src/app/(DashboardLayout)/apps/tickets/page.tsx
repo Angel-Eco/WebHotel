@@ -15,11 +15,12 @@ const BCrumb = [
     title: 'Tickets',
   },
 ];
+//items={BCrumb}
 
 const TicketList = () => {
   return (
     <PageContainer title="Ticket App" description="this is Ticket App">
-      <Breadcrumb title="Tickets app" items={BCrumb} />
+      <Breadcrumb title="" subtitle="" />
       <ChildCard>
         <TicketFilter />
         <TicketListing />
