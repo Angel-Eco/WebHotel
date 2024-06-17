@@ -5,8 +5,8 @@ import "./global.css";
 
 
 export const metadata = {
-  title: "Modernize Main Demo 2",
-  description: "Modernize Main kit",
+  title: "Ecokumen demo",
+  description: "Ecokumen Project",
 };
 
 export default function RootLayout({
