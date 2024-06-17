@@ -11,9 +11,8 @@ import { useSelector, useDispatch } from '@/store/hooks';
 import { toggleMobileSidebar } from '@/store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons-react';
 import Notifications from '../../vertical/header/Notification';
-import Cart from '../../vertical/header/Cart';
+//import Cart from '../../vertical/header/Cart';
 import Profile from '../../vertical/header/Profile';
-import Search from '../../vertical/header/Search';
 import Language from '../../vertical/header/Language';
 import Navigation from '../../vertical/header/Navigation';
 import Logo from '../../shared/logo/Logo';
@@ -63,9 +62,8 @@ const Header = () => {
           ''
         )}
         {/* ------------------------------------------- */}
-        {/* Search Dropdown */}
-        {/* ------------------------------------------- */}
-        <Search />
+        {/* Search Dropdown fue eliminado */}
+        {/* ------------------------------------------- */}        
          {lgUp ? (
           <>
             <Navigation />
@@ -76,8 +74,7 @@ const Header = () => {
           <Language />
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          <Cart />
+          {/* ------------------------------------------- */}          
           <Notifications />
           <Profile />
         </Stack>

@@ -25,7 +25,7 @@ const Contacts = () => {
 
   return (
     <PageContainer title="Contact" description="this is Contact">
-      <Breadcrumb title="Contact app" subtitle="List Your Contacts" />
+      <Breadcrumb title="" subtitle="" />
       <AppCard>
         {/* ------------------------------------------- */}
         {/* Left Part */}

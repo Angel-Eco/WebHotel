@@ -157,7 +157,7 @@ const BigCalendar = () => {
 
   return (
     <PageContainer title="Calendar" description="this is Calendar">
-      <Breadcrumb title="Calendar" subtitle="App" />
+      <Breadcrumb title="" subtitle="" />
       <BlankCard>
         {/* ------------------------------------------- */}
         {/* Calendar */}
