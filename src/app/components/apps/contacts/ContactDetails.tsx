@@ -21,17 +21,30 @@ import { ContactType } from '../../../(DashboardLayout)/types/apps/contact';
 import { IconPencil, IconStar, IconTrash, IconDeviceFloppy } from '@tabler/icons-react';
 import Scrollbar from '../../../components/custom-scroll/Scrollbar';
 import Image from 'next/image';
+import { RootState } from '@/store/store';
+
+
 
 const ContactDetails = () => {
-  const contactDetail: ContactType = useSelector(
+ 
+  const contacts: ContactType[] = useSelector((state) => state.contactsReducer.contacts);
+  const contactContent = useSelector((state: RootState) => state.contactsReducer.contactContent);
+  const contactDetailFind = contacts.find((contact) => contact.id === contactContent);
+
+  const contactDetail: ContactType | undefined = useSelector(
+    (state) => contactDetailFind,
+  );
+
+  /*
+    const contactDetail: ContactType = useSelector(
     (state) => state.contactsReducer.contacts[state.contactsReducer.contactContent - 1],
   );
+  */
   const editContact = useSelector((state) => state.contactsReducer.editContact);
   const dispatch = useDispatch();
-  const theme = useTheme();
-
+  const theme = useTheme();    
   const warningColor = theme.palette.warning.main;
-
+  
   const tableData = [
     {
       id: 1,

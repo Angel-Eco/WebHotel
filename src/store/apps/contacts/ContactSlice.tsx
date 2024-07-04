@@ -2,12 +2,13 @@ import axios from '../../../utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../../store';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { ContactType } from '@/app/(DashboardLayout)/types/apps/contact';
 
 const API_URL = '/api/data/contacts/ContactsData';
 
 interface StateType {
   contacts: any[];
-  contactContent: number;
+  contactContent: number|string|null;
   contactSearch: string;
   editContact: boolean;
   currentFilter: string;
@@ -31,8 +32,8 @@ export const ContactSlice = createSlice({
     SearchContact: (state: StateType, action) => {
       state.contactSearch = action.payload;
     },
-    SelectContact: (state: StateType, action) => {
-      state.contactContent = action.payload;
+    SelectContact: (state: StateType, action) => {      
+      state.contactContent = action.payload;         
     },
     DeleteContact: (state: StateType, action) => {
       state.contacts = state.contacts.map((contact) =>
@@ -97,6 +98,7 @@ export const ContactSlice = createSlice({
             starred: false,
             deleted: false,
           },
+                              
         };
       },
     },
@@ -115,10 +117,21 @@ export const {
   setVisibilityFilter,
 } = ContactSlice.actions;
 
+
 export const fetchContacts = () => async (dispatch: AppDispatch) => {
   try {
-    const response = await axios.get(`${API_URL}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_CONTACTOS}`);  
     dispatch(getContacts(response.data));
+  } catch (err: any) {
+    throw new Error(err);
+  }
+};
+
+export const deleteContact = (id: number|string) => async (dispatch: AppDispatch) => {
+  try {
+    console.log("delete")
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL_CONTACTOS}/${id}`);
+    dispatch(DeleteContact(id));
   } catch (err: any) {
     throw new Error(err);
   }

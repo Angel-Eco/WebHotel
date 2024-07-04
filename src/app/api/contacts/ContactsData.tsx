@@ -1,5 +1,6 @@
 import mock from '../mock';
 import type { ContactType } from '@/app/(DashboardLayout)/types/apps/contact';
+import axios from '@/utils/axios';
 import { Chance } from 'chance';
 
 const chance = new Chance();
@@ -7,7 +8,7 @@ const chance = new Chance();
 export const ContactList: ContactType[] = [
   {
     id: 1,
-    firstname: 'Georgeanna',
+    firstname: 'Test',
     lastname: 'Ramero',
     image: "/images/profile/user-2.jpg",
     department: 'Sales',
@@ -457,9 +458,13 @@ export const ContactList: ContactType[] = [
   },
 ];
 
-mock.onGet('/api/data/contacts/ContactsData').reply(() => {
-  const contacts = ContactList;
+//export const ContactList2: ContactType[] =JSON.parse(JSON.stringify(await axios.get(`http://127.0.0.1:8000/clientes`))); 
 
+
+mock.onGet('/api/data/contacts/ContactsData').reply(() => {
+  const contacts = ContactList; 
+  console.log("test")
+  console.log(contacts)
   return [200, JSON.parse(JSON.stringify(contacts))];
 });
 export default ContactList;

@@ -31,7 +31,7 @@ const TicketFilter = () => {
           sx={{ backgroundColor: 'primary.light', color: 'primary.main' }}
         >
           <Typography variant="h3">{counter.length}</Typography>
-          <Typography variant="h6">Total Tickets</Typography>
+          <Typography variant="h6">Total Piezas</Typography>
         </BoxStyled>
       </Grid>
       <Grid item xs={12} md={6} lg={3}>
@@ -40,7 +40,7 @@ const TicketFilter = () => {
           sx={{ backgroundColor: 'warning.light', color: 'warning.main' }}
         >
           <Typography variant="h3">{pendingC}</Typography>
-          <Typography variant="h6">Pending Tickets</Typography>
+          <Typography variant="h6">Piezas Pendientes</Typography>
         </BoxStyled>
       </Grid>
       <Grid item xs={12} md={6} lg={3}>
@@ -49,7 +49,7 @@ const TicketFilter = () => {
           sx={{ backgroundColor: 'success.light', color: 'success.main' }}
         >
           <Typography variant="h3">{openC}</Typography>
-          <Typography variant="h6">Open Tickets</Typography>
+          <Typography variant="h6">Piezas Disponibles</Typography>
         </BoxStyled>
       </Grid>
       <Grid item xs={12} md={6} lg={3}>
@@ -58,7 +58,7 @@ const TicketFilter = () => {
           sx={{ backgroundColor: 'error.light', color: 'error.main' }}
         >
           <Typography variant="h3">{closeC}</Typography>
-          <Typography variant="h6">Closed Tickets</Typography>
+          <Typography variant="h6">Piezas Reservadas</Typography>
         </BoxStyled>
       </Grid>
     </Grid>

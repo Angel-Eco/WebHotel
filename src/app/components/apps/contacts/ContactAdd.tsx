@@ -9,8 +9,10 @@ import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from '@/store/hooks';
-import { addContact } from '@/store/apps/contacts/ContactSlice';
+import { addContact, fetchContacts } from '@/store/apps/contacts/ContactSlice';
 import user1 from '/public/images/profile/user-10.jpg';
+import axios from '@/utils/axios';
+
 
 const ContactAdd = () => {
   const dispatch = useDispatch();
@@ -32,8 +34,23 @@ const ContactAdd = () => {
     notes: '',
   });
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const newUser = {   
+      id,   
+      firstname: values.firstname,
+      lastname: values.lastname,
+      department: values.department,
+      company: values.company,
+      phone: values.phone,
+      email: values.email,
+      image: "/images/profile/user-4.jpg",
+      address: values.address,
+      notes: values.notes,
+      frequentlycontacted: false,
+      starred: false,
+      deleted: false
+    };     
     dispatch(
       addContact(
         id,
@@ -47,7 +64,13 @@ const ContactAdd = () => {
         values.address,
         values.notes,
       ),
-    );
+    );     
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL_CONTACTOS}`, newUser, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'victory123'
+      },
+    });    
     setModal(!modal);
   };
 
