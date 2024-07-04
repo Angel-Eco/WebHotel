@@ -27,7 +27,7 @@ const ContactSearch = ({ onClick }: Props) => {
         <IconMenu2 width="16" />
       </Fab>
       <TextField
-        id="outlined-basic"
+        idCliente="outlined-basic"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
