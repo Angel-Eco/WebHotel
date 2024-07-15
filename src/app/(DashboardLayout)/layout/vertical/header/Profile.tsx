@@ -16,8 +16,6 @@ import { Stack } from '@mui/system';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
-import { Session } from "next-auth";
-
 
 const Profile = () => {
   const { data: session } = useSession()
