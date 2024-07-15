@@ -99,19 +99,25 @@ const TicketListing = () => {
           <TableHead>
             <TableRow>
               <TableCell>
-                <Typography variant="h6">Id</Typography>
+                <Typography variant="h6">N° Pieza</Typography>
+              </TableCell>              
+              <TableCell>
+                <Typography variant="h6">Asignada a</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6">Ticket</Typography>
+                <Typography variant="h6">Estado</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6">Assigned To</Typography>
+                <Typography variant="h6">Capacidad</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6">Status</Typography>
+                <Typography variant="h6">Fecha Inicio</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6">Date</Typography>
+                <Typography variant="h6">Fecha Fin</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h6">Descripcion</Typography>
               </TableCell>
               <TableCell align="right">
                 <Typography variant="h6">Action</Typography>
@@ -120,24 +126,8 @@ const TicketListing = () => {
           </TableHead>
           <TableBody>
             {tickets.map((ticket) => (
-              <TableRow key={ticket.Id} hover>
-                <TableCell>{ticket.Id}</TableCell>
-                <TableCell>
-                  <Box>
-                    <Typography variant="h6" fontWeight={600} noWrap>
-                      {ticket.ticketTitle}
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      noWrap
-                      sx={{ maxWidth: '250px' }}
-                      variant="subtitle2"
-                      fontWeight={400}
-                    >
-                      {ticket.ticketDescription}
-                    </Typography>
-                  </Box>
-                </TableCell>
+              <TableRow key={ticket.id_pieza} hover>
+                <TableCell>{ticket.nombre_pieza}</TableCell>                
                 <TableCell>
                   <Stack direction="row" gap="10px" alignItems="center">
                     <Avatar
@@ -161,13 +151,43 @@ const TicketListing = () => {
                   />
                 </TableCell>
                 <TableCell>
+                  <Chip
+                    sx={{
+                      backgroundColor: ticketBadge(ticket),
+                    }}
+                    size="small"
+                    label={ticket.Capacity}
+                  />
+                </TableCell>
+                <TableCell>
                   <Typography variant="subtitle1">
-                    {format(new Date(ticket.Date), 'E, MMM d')}
+                    {format(new Date(ticket.date_init), 'E, MMM d')}
                   </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle1">
+                    {format(new Date(ticket.date_init), 'E, MMM d')}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ maxWidth: '200px' }}>
+                  <Box>
+                    <Typography variant="h6" fontWeight={600} noWrap>
+                      {ticket.ticketTitle}
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      noWrap
+                      sx={{ maxWidth: '250px' }}
+                      variant="subtitle2"
+                      fontWeight={400}
+                    >
+                      {ticket.room_description}
+                    </Typography>
+                  </Box>
                 </TableCell>
                 <TableCell align="right">
                   <Tooltip title="Delete Ticket">
-                    <IconButton onClick={() => dispatch(DeleteTicket(ticket.Id))}>
+                    <IconButton onClick={() => dispatch(DeleteTicket(ticket.id_pieza))}>
                       <IconTrash size="18" />
                     </IconButton>
                   </Tooltip>
