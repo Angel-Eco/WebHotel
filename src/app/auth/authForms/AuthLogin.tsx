@@ -34,7 +34,7 @@ const AuthLogin: React.FC<loginType> = ({ title, subtitle, subtext }) => {
     });
 
     if (result?.ok) {      
-      router.push(process.env.NEXT_PUBLIC_INICIO as string);
+      router.push(process.env.NEXTAUTH_URL as string);
     } else {
       console.error('Error logging in', result?.error);
     }
