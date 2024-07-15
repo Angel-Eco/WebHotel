@@ -31,7 +31,7 @@ const TicketFilter = () => {
           sx={{ backgroundColor: 'primary.light', color: 'primary.main' }}
         >
           <Typography variant="h3">{counter.length}</Typography>
-          <Typography variant="h6">Total Piezas</Typography>
+          <Typography variant="h6">Piezas</Typography>
         </BoxStyled>
       </Grid>
       <Grid item xs={12} md={6} lg={3}>

@@ -14,9 +14,13 @@ import * as dropdownData from './data';
 import { IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+
+import { Session } from "next-auth";
 
 
 const Profile = () => {
+  const { data: session } = useSession()
   const [anchorEl2, setAnchorEl2] = useState(null);
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
@@ -41,7 +45,7 @@ const Profile = () => {
         onClick={handleClick2}
       >
         <Avatar
-          src={"/images/profile/user-1.jpg"}
+          src={session?.user.image}
           alt={'ProfileImg'}
           sx={{
             width: 35,
@@ -69,10 +73,10 @@ const Profile = () => {
       >
         
         <Stack direction="row" py={0} spacing={2} alignItems="center">
-        <Avatar src={"/images/profile/user-1.jpg"} alt={"ProfileImg"} sx={{ width: 95, height: 95 }} />
+        <Avatar src={session?.user.image} alt={"ProfileImg"} sx={{ width: 95, height: 95 }} />
           <Box>
             <Typography variant="subtitle2" color="textPrimary" fontWeight={600}>
-              Angel Espinoza
+            {session?.user.name || "Unknown User"}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
               Developer

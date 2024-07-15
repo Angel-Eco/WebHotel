@@ -55,7 +55,7 @@ const Menuitems: MenuitemsType[] = [
   },
   {
     id: uniqueId(),
-    title: "Disponibilidad",
+    title: "Piezas",
     icon: IconTicket,
     href: "/apps/tickets",
   },   
