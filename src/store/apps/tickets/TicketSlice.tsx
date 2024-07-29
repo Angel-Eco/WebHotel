@@ -38,9 +38,9 @@ export const TicketSlice = createSlice({
 
 export const { getTickets, setVisibilityFilter, SearchTicket, DeleteTicket } = TicketSlice.actions;
 
-export const fetchTickets = () => async (dispatch: AppDispatch) => {
-  try {
-    const response = await axios.get(`${API_URL}`);
+export const fetchTickets = (userID: string) => async (dispatch: AppDispatch) => {
+  try { 
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_PIEZAS}/${userID}`);
     dispatch(getTickets(response.data));
   } catch (err: any) {
     throw new Error(err);

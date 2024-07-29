@@ -18,22 +18,28 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 import { fetchTickets, DeleteTicket, SearchTicket } from '@/store/apps/tickets/TicketSlice';
-import { IconTrash } from '@tabler/icons-react';
 import { TicketType } from '../../../(DashboardLayout)/types/apps/ticket';
+import { useSession } from 'next-auth/react';
+import { ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { IconDotsVertical, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
+
 
 const TicketListing = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  // Supongamos que obtienes el userId de session  
+  const { data: session } = useSession();
+  const userID = session?.user.id  
 
   useEffect(() => {
-    dispatch(fetchTickets());
+    dispatch(fetchTickets(userID));
   }, [dispatch]);
 
   const getVisibleTickets = (tickets: TicketType[], filter: string, ticketSearch: string) => {
     switch (filter) {
       case 'total_tickets':
         return tickets.filter(
-          (c) => !c.deleted && c.ticketTitle.toLocaleLowerCase().includes(ticketSearch),
+          (c) => !c.deleted && c.roomTitle.toLocaleLowerCase().includes(ticketSearch),
         );
 
       case 'Pending':
@@ -41,7 +47,7 @@ const TicketListing = () => {
           (c) =>
             !c.deleted &&
             c.Status === 'Pending' &&
-            c.ticketTitle.toLocaleLowerCase().includes(ticketSearch),
+            c.roomTitle.toLocaleLowerCase().includes(ticketSearch),
         );
 
       case 'Closed':
@@ -49,7 +55,7 @@ const TicketListing = () => {
           (c) =>
             !c.deleted &&
             c.Status === 'Closed' &&
-            c.ticketTitle.toLocaleLowerCase().includes(ticketSearch),
+            c.roomTitle.toLocaleLowerCase().includes(ticketSearch),
         );
 
       case 'Open':
@@ -57,7 +63,7 @@ const TicketListing = () => {
           (c) =>
             !c.deleted &&
             c.Status === 'Open' &&
-            c.ticketTitle.toLocaleLowerCase().includes(ticketSearch),
+            c.roomTitle.toLocaleLowerCase().includes(ticketSearch),
         );
 
       default:
@@ -73,9 +79,9 @@ const TicketListing = () => {
     ),
   );
   const ticketBadge = (ticket: TicketType) => {
-    return ticket.Status === 'Open'
+    return ticket.Status === 'Disponible'
       ? theme.palette.success.light
-      : ticket.Status === 'Closed'
+      : ticket.Status === 'Reservada'
         ? theme.palette.error.light
         : ticket.Status === 'Pending'
           ? theme.palette.warning.light
@@ -83,6 +89,16 @@ const TicketListing = () => {
             ? theme.palette.primary.light
             : 'primary';
   };
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
 
   return (
     <Box mt={4}>
@@ -126,19 +142,19 @@ const TicketListing = () => {
           </TableHead>
           <TableBody>
             {tickets.map((ticket) => (
-              <TableRow key={ticket.id_pieza} hover>
-                <TableCell>{ticket.nombre_pieza}</TableCell>                
+              <TableRow key={ticket.id_room} hover>
+                <TableCell>{ticket.room_name}</TableCell>                
                 <TableCell>
                   <Stack direction="row" gap="10px" alignItems="center">
                     <Avatar
-                      src={ticket.thumb}
-                      alt={ticket.thumb}
+                      src={ticket.clientImage}
+                      alt={ticket.clientImage}
                       sx={{
                         borderRadius: '100%',
                         width: '35', height: '35',
                       }}
                     />
-                    <Typography variant="h6">{ticket.AgentName}</Typography>
+                    <Typography variant="h6">{ticket.clientName}</Typography>
                   </Stack>
                 </TableCell>
                 <TableCell>
@@ -161,18 +177,18 @@ const TicketListing = () => {
                 </TableCell>
                 <TableCell>
                   <Typography variant="subtitle1">
-                    {format(new Date(ticket.date_init), 'E, MMM d')}
+                  {ticket.date_init ? format(new Date(ticket.date_init), 'E, MMM d') : 'N/A'}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography variant="subtitle1">
-                    {format(new Date(ticket.date_init), 'E, MMM d')}
+                  {ticket.date_init ? format(new Date(ticket.date_init), 'E, MMM d') : 'N/A'}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ maxWidth: '200px' }}>
                   <Box>
                     <Typography variant="h6" fontWeight={600} noWrap>
-                      {ticket.ticketTitle}
+                      {ticket.roomTitle}
                     </Typography>
                     <Typography
                       color="textSecondary"
@@ -186,11 +202,43 @@ const TicketListing = () => {
                   </Box>
                 </TableCell>
                 <TableCell align="right">
-                  <Tooltip title="Delete Ticket">
-                    <IconButton onClick={() => dispatch(DeleteTicket(ticket.id_pieza))}>
-                      <IconTrash size="18" />
+                  <IconButton
+                      id="basic-button"
+                      aria-controls={open ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleClick}
+                    >
+                      <IconDotsVertical width={18} />
                     </IconButton>
-                  </Tooltip>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                          <IconPlus width={18} />
+                        </ListItemIcon>
+                        Agregar
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                          <IconEdit width={18} />
+                        </ListItemIcon>
+                        Edit
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                          <IconTrash width={18} />
+                        </ListItemIcon>
+                        Delete
+                      </MenuItem>
+                    </Menu>
                 </TableCell>
               </TableRow>
             ))}

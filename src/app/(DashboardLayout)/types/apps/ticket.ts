@@ -1,14 +1,14 @@
 export interface TicketType {
-  id_pieza: number;
-  nombre_pieza: string;
-  ticketTitle: string; //borrar?
+  id_room: number;
+  room_name: string;
+  roomTitle: string;
   room_description: string;
   Capacity: number;
   Status: string;
   Label: string;
-  thumb: string;
-  AgentName: string; //borrar?
-  cliente_id: number|null;  
+  clientImage: string;
+  clientName: string;   
   date_init: Date;
+  date_fin: Date;
   deleted: boolean;
 }
